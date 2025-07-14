@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://h7xakbe2sx1l"]
+
+[ext_resource type="Script" uid="uid://did3jkpj3ao50" path="res://Scripts/Poems/Cat/Cat.gd" id="1_q6vt3"]
+[ext_resource type="Texture2D" uid="uid://corb50fuekx3v" path="res://Animations/FlyingCat/Cat.png" id="1_tr0ve"]
+
+[sub_resource type="Animation" id="Animation_pj03p"]
+resource_name = "fly"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [20, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3hwgn"]
+_data = {
+&"fly": SubResource("Animation_pj03p")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0lbp"]
+size = Vector2(106.25, 16.5)
+
+[node name="Area2D" type="Area2D" groups=["Cat"]]
+position = Vector2(53, 435)
+script = ExtResource("1_q6vt3")
+metadata/_edit_group_ = true
+
+[node name="CatAnim" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("1_tr0ve")
+hframes = 10
+vframes = 5
+frame = 20
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CatAnim"]
+libraries = {
+&"": SubResource("AnimationLibrary_3hwgn")
+}
+speed_scale = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(7.875, -51.25)
+shape = SubResource("RectangleShape2D_w0lbp")
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -33.0
+offset_top = -47.0
+offset_right = 57.0
+offset_bottom = 37.0
+
+[connection signal="gui_input" from="Button" to="." method="_on_button_gui_input"]

@@ -1,0 +1,66 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Digital wellnests"
+run/main_scene="res://Scenes/Basic/Intro.tscn"
+config/features=PackedStringArray("4.4", "Mobile")
+run/max_fps=144
+boot_splash/bg_color=Color(0.423529, 0.239216, 0.568627, 1)
+boot_splash/fullsize=false
+boot_splash/use_filter=false
+boot_splash/image="res://Images/Loading.png"
+config/icon="uid://ck4ex7wj5vphv"
+boot_splash/minimum_display_time=2000
+run/icon="res://Icon.svg"
+run/name="Digital Wellnests"
+
+[audio]
+
+buses/default_bus_layout="res://Scenes/Basic/default_bus_layout.tres"
+
+[autoload]
+
+GD="*res://Scripts/Poems/Cat/CatVariables.gd"
+Music="*res://Scenes/Basic/Music.tscn"
+PopUps="*res://Scripts/Basic/PopUps.tscn"
+
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=480
+window/size/always_on_top=true
+window/stretch/mode="canvas_items"
+
+[filesystem]
+
+import/blender/enabled=false
+
+[global_group]
+
+ground_manager=""
+
+[input]
+
+pause={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+textures/vram_compression/import_etc2_astc=true

@@ -1,0 +1,368 @@
+[gd_scene load_steps=37 format=3 uid="uid://cugtttre47j1d"]
+
+[ext_resource type="Texture2D" uid="uid://b7x1xhmjy6pl0" path="res://Images/BackGround.jpg" id="1_klf3e"]
+[ext_resource type="Script" uid="uid://dmc7ksynq0phf" path="res://Scripts/Basic/Game.gd" id="1_qykey"]
+[ext_resource type="PackedScene" uid="uid://ci06a0bs5c7q8" path="res://Scenes/Poems/Snail/Conveyor.tscn" id="3_y5ogc"]
+[ext_resource type="PackedScene" uid="uid://4wkohyfjs3fn" path="res://Scenes/Poems/Snail/Envelope.tscn" id="4_tvbar"]
+[ext_resource type="PackedScene" uid="uid://celr1t2vxkewx" path="res://Scenes/Poems/Hippo/Target.tscn" id="5_pnnr2"]
+[ext_resource type="PackedScene" uid="uid://drfcovfeg6hec" path="res://Scenes/Poems/Wolf/Tile.tscn" id="6_16q3m"]
+[ext_resource type="PackedScene" uid="uid://cln8y7rifqruh" path="res://Scenes/Poems/Cat/Activities.tscn" id="7_25vkh"]
+[ext_resource type="PackedScene" uid="uid://h7xakbe2sx1l" path="res://Scenes/Poems/Cat/Cat.tscn" id="8_y7na4"]
+[ext_resource type="PackedScene" uid="uid://cnxd7db1y8nwr" path="res://Scenes/Poems/Fish/Mails.tscn" id="9_h53i4"]
+[ext_resource type="PackedScene" uid="uid://hkh28470jkqy" path="res://Scenes/Poems/Elephant/Cactus.tscn" id="9_krv1n"]
+[ext_resource type="PackedScene" uid="uid://bfuwqf424j1hd" path="res://Scenes/Poems/Elephant/Cacti.tscn" id="10_jcd8q"]
+[ext_resource type="PackedScene" uid="uid://cxj3dbbmmfw8r" path="res://Scenes/Poems/Elephant/Thorn.tscn" id="11_3gio5"]
+[ext_resource type="PackedScene" uid="uid://ciuq2h10egxjb" path="res://Scenes/Poems/Elephant/Ball.tscn" id="12_18gtp"]
+[ext_resource type="PackedScene" uid="uid://1quej1xdpdtc" path="res://Scenes/Poems/Elephant/Bird.tscn" id="13_7m4i4"]
+[ext_resource type="PackedScene" uid="uid://c7adnmbic5og6" path="res://Scenes/Poems/Elephant/Coin.tscn" id="14_w8vs1"]
+[ext_resource type="PackedScene" uid="uid://dsrk1ffxtrkey" path="res://Scenes/Basic/Displays/Hud.tscn" id="18_3gio5"]
+[ext_resource type="FontFile" uid="uid://cuao14s32x006" path="res://Fonts/Caroni-Regular.otf" id="728_7gdf6"]
+[ext_resource type="Texture2D" uid="uid://dwnnlial0w88q" path="res://Images/GameEx0.png" id="729_ald1e"]
+[ext_resource type="Texture2D" uid="uid://f1xch3t6ltfx" path="res://Images/Pause.png" id="730_uh23x"]
+[ext_resource type="AudioStream" uid="uid://cv5g7x4o21fcb" path="res://Audio/Effects/Jungle.wav" id="980_t6dhn"]
+[ext_resource type="PackedScene" uid="uid://c67yvm48yyejt" path="res://Scenes/Poems/Elephant/Rabbit.tscn" id="1224_dccnl"]
+[ext_resource type="PackedScene" uid="uid://culixfaqwtsx3" path="res://Scenes/Poems/Elephant/Background.tscn" id="1225_q6emi"]
+[ext_resource type="PackedScene" uid="uid://cydy5wvvioivi" path="res://Scenes/Basic/Pause.tscn" id="1225_xa8gl"]
+[ext_resource type="PackedScene" uid="uid://dinimoyomv3p6" path="res://Scenes/Poems/Elephant/Ground.tscn" id="1226_6r11e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v8hw3"]
+bg_color = Color(0.00784314, 0.313726, 0.211765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 12
+border_color = Color(0.00392157, 0.196078, 0.12549, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wukaq"]
+bg_color = Color(0.00392157, 0.235294, 0.12549, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 12
+border_color = Color(0.00392157, 0.188235, 0.121569, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d8kia"]
+bg_color = Color(0.00784314, 0.282353, 0.188235, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 12
+border_color = Color(0.00392157, 0.196078, 0.12549, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Curve2D" id="Curve2D_kb7ug"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -5, 0, 0, 0, 0, 719, -3)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_0f708"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1.17165, 432.001, 0, 0, 0, 0, 722, 436.5, 0, 0, 0, 0, 722.065, 456.547, 0, 0, 0, 0, 722, 480.648, 0, 0, 0, 0, -11.1227, 480.648)
+}
+point_count = 5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1r3jb"]
+size = Vector2(718, 20)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f2kpt"]
+bg_color = Color(0.490196, 0, 0.490196, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 12
+border_color = Color(0.34902, 0, 0.34902, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nsus5"]
+bg_color = Color(0.411765, 0, 0.411765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 12
+border_color = Color(0.317647, 0, 0.317647, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wf2sm"]
+bg_color = Color(0.435294, 0, 0.435294, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 12
+border_color = Color(0.34902, 0, 0.34902, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e8c2u"]
+bg_color = Color(0.384314, 0.384314, 0.0392157, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 12
+border_color = Color(0.294118, 0.294118, 0.0235294, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3t4hr"]
+bg_color = Color(0.321569, 0.321569, 0.027451, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 12
+border_color = Color(0.266667, 0.266667, 0.0196078, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_se7yk"]
+bg_color = Color(0.345098, 0.345098, 0.0313726, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 12
+border_color = Color(0.294118, 0.294118, 0.0235294, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 720.0
+offset_bottom = 480.0
+pivot_offset = Vector2(360, 240)
+script = ExtResource("1_qykey")
+Conveyor = ExtResource("3_y5ogc")
+Envelope = ExtResource("4_tvbar")
+Target = ExtResource("5_pnnr2")
+Tile = ExtResource("6_16q3m")
+Activities = ExtResource("7_25vkh")
+Cat = ExtResource("8_y7na4")
+Mails = ExtResource("9_h53i4")
+Cactus = ExtResource("9_krv1n")
+Cacti = ExtResource("10_jcd8q")
+Thorn = ExtResource("11_3gio5")
+Ball = ExtResource("12_18gtp")
+Bird = ExtResource("13_7m4i4")
+Coin = ExtResource("14_w8vs1")
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 720.0
+offset_bottom = 480.0
+texture = ExtResource("1_klf3e")
+expand_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="BG"]
+modulate = Color(0.513726, 0.513726, 0.513726, 0.666667)
+layout_mode = 0
+offset_right = 720.0
+offset_bottom = 480.0
+metadata/_edit_lock_ = true
+
+[node name="inGame" type="Control" parent="BG"]
+anchors_preset = 0
+offset_right = 720.0
+offset_bottom = 480.0
+metadata/_edit_lock_ = true
+
+[node name="StartGame" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="HSlider" type="HSlider" parent="StartGame"]
+offset_left = 98.0
+offset_top = 320.0
+offset_right = 638.0
+offset_bottom = 433.0
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+metadata/_edit_lock_ = true
+
+[node name="LevelIndicator" type="RichTextLabel" parent="StartGame"]
+offset_left = 281.0
+offset_top = 397.0
+offset_right = 459.0
+offset_bottom = 476.0
+pivot_offset = Vector2(89, 39)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("728_7gdf6")
+theme_override_font_sizes/normal_font_size = 60
+text = "Level 1"
+
+[node name="playButton" type="Button" parent="StartGame"]
+modulate = Color(0, 1, 0, 1)
+offset_left = 471.0
+offset_top = 387.0
+offset_right = 709.0
+offset_bottom = 467.0
+theme_override_fonts/font = ExtResource("728_7gdf6")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/hover = SubResource("StyleBoxFlat_v8hw3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wukaq")
+theme_override_styles/normal = SubResource("StyleBoxFlat_d8kia")
+text = "Play
+"
+
+[node name="HowTo" type="TextureRect" parent="StartGame"]
+offset_left = 94.0
+offset_top = 15.0
+offset_right = 644.0
+offset_bottom = 367.0
+texture = ExtResource("729_ald1e")
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StartGame"]
+
+[node name="Hud" parent="." instance=ExtResource("18_3gio5")]
+
+[node name="CatPath2D" type="Path2D" parent="."]
+self_modulate = Color(0.501961, 0.6, 1, 0.701961)
+position = Vector2(5, 1)
+scale = Vector2(1, 0.6)
+curve = SubResource("Curve2D_kb7ug")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="CatPath2D"]
+position = Vector2(0, -5)
+rotation = 0.00278163
+
+[node name="FishPath2D" type="Path2D" parent="."]
+position = Vector2(48.9517, 442.479)
+scale = Vector2(0.894723, 0.0822243)
+curve = SubResource("Curve2D_0f708")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="FishPath2D"]
+unique_name_in_owner = true
+position = Vector2(1.17165, 432.001)
+rotation = 0.00624134
+
+[node name="EnvelopeStop" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvelopeStop"]
+visible = false
+position = Vector2(360, 435)
+shape = SubResource("RectangleShape2D_1r3jb")
+
+[node name="ActivitiesTimer" type="Timer" parent="."]
+
+[node name="BullyTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="CatTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="EnvelopeTimer" type="Timer" parent="."]
+
+[node name="MailTimer" type="Timer" parent="."]
+wait_time = 0.8
+
+[node name="EndGame" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="bMenu" type="Button" parent="EndGame"]
+modulate = Color(0.917647, 0, 1, 1)
+offset_left = 30.0
+offset_top = 370.0
+offset_right = 330.0
+offset_bottom = 470.0
+theme_override_fonts/font = ExtResource("728_7gdf6")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/hover = SubResource("StyleBoxFlat_f2kpt")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nsus5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_wf2sm")
+text = "Menu"
+
+[node name="bLevel" type="Button" parent="EndGame"]
+modulate = Color(0.882353, 1, 0, 1)
+offset_left = 390.0
+offset_top = 370.0
+offset_right = 690.0
+offset_bottom = 470.0
+theme_override_fonts/font = ExtResource("728_7gdf6")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/hover = SubResource("StyleBoxFlat_e8c2u")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3t4hr")
+theme_override_styles/normal = SubResource("StyleBoxFlat_se7yk")
+text = "Play Again"
+
+[node name="PauseGame" type="CanvasLayer" parent="."]
+
+[node name="PauseG" parent="PauseGame" instance=ExtResource("1225_xa8gl")]
+visible = false
+
+[node name="Pause" type="TextureButton" parent="PauseGame"]
+visible = false
+top_level = true
+offset_left = 351.0
+offset_top = 1.0
+offset_right = 385.0
+offset_bottom = 35.0
+texture_normal = ExtResource("730_uh23x")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="GameNode2D" type="Node2D" parent="."]
+
+[node name="Rabbit" parent="GameNode2D" instance=ExtResource("1224_dccnl")]
+visible = false
+position = Vector2(23, 336)
+
+[node name="Background" parent="GameNode2D" instance=ExtResource("1225_q6emi")]
+visible = false
+
+[node name="Camera2D" type="Camera2D" parent="GameNode2D"]
+visible = false
+position = Vector2(360, 240)
+limit_left = 0
+limit_top = 0
+limit_bottom = 0
+limit_smoothed = true
+
+[node name="Ground" parent="GameNode2D" instance=ExtResource("1226_6r11e")]
+visible = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("980_t6dhn")
+
+[node name="Effects" type="AudioStreamPlayer" parent="."]
+volume_db = 10.0
+pitch_scale = 1.1
+
+[connection signal="value_changed" from="StartGame/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="StartGame/playButton" to="." method="_on_play_button_pressed"]
+[connection signal="area_entered" from="EnvelopeStop" to="." method="_on_envelope_stop_area_entered"]
+[connection signal="timeout" from="ActivitiesTimer" to="." method="_on_activities_timer_timeout"]
+[connection signal="timeout" from="BullyTimer" to="." method="_on_bully_timer_timeout"]
+[connection signal="timeout" from="CatTimer" to="." method="_on_cat_timer_timeout"]
+[connection signal="timeout" from="EnvelopeTimer" to="." method="_on_envelope_timer_timeout"]
+[connection signal="timeout" from="MailTimer" to="." method="_on_mail_timer_timeout"]
+[connection signal="button_down" from="EndGame/bMenu" to="." method="_on_b_menu_button_down"]
+[connection signal="button_down" from="EndGame/bLevel" to="." method="_on_b_level_button_down"]
+[connection signal="pressed" from="PauseGame/Pause" to="." method="_on_pause_pressed"]
