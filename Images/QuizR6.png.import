@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyn7iet80l8ts"
-path="res://.godot/imported/QuizR4.png-aa4b911352f6ba532acfcc17df187687.ctex"
+uid="uid://0r6wtohibmc0"
+path="res://.godot/imported/QuizR6.png-8767bc8c092571eaff7fffc225efc2ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/QuizR4.png"
-dest_files=["res://.godot/imported/QuizR4.png-aa4b911352f6ba532acfcc17df187687.ctex"]
+source_file="res://Images/QuizR6.png"
+dest_files=["res://.godot/imported/QuizR6.png-8767bc8c092571eaff7fffc225efc2ff.ctex"]
 
 [params]
 
