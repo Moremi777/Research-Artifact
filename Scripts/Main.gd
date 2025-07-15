@@ -154,24 +154,22 @@ func swap():
 		
 		$Story.bbcode_text = "[center]Elephant and his shoe[/center]"
 		
-	# Rabbit with the Tablet
 	elif iCount == 3:
-		# Set tweens for positions and scales
 		psTween.tween_property(snail, "position", Vector2(320, 420), 0.35)
 		phTween.tween_property(hippo, "position", Vector2(650 , 355), 0.35)
-		pwTween.tween_property(wolf, "position", Vector2(355, 239), 0.35)
-		prTween.tween_property(rabbit, "position", Vector2(355, 239), 0.35)
-		scTween.tween_property(cat, "position", Vector2(520, 405), 0.35)
-		pwTween.parallel().tween_property(fish, "position",  Vector2(180 , 396), 0.35)
+		prTween.tween_property(rabbit, "position", Vector2(270, 250), 0.35)
+		pcTween.tween_property(cat, "position", Vector2(520, 405), 0.35)
+		pwTween.parallel().tween_property(fish,  "position", Vector2(180 , 396), 0.35)
 		peTween.tween_property(elephant, "position", Vector2(55, 350), 0.35)
+		pwTween.parallel().tween_property(wolf, "position", Vector2(390, 260), 0.35)
 
 		ssTween.tween_property(snail, "scale", Vector2(0.45, 0.45), 0.3)
 		shTween.tween_property(hippo, "scale", Vector2(0.3, 0.3), 0.3)
-		swTween.tween_property(wolf, "scale", Vector2(1, 1), 0.3)
-		srTween.tween_property(rabbit, "scale", Vector2(1, 1), 0.3)
+		srTween.tween_property(rabbit, "scale", Vector2(0.4, 0.4), 0.3)
 		scTween.tween_property(cat, "scale", Vector2(0.37, 0.37), 0.3)
 		sfTween.parallel().tween_property(fish, "scale", Vector2(0.39, 0.39), 0.3)
 		seTween.tween_property(elephant, "scale", Vector2(0.4, 0.4), 0.3)
+		swTween.tween_property(wolf, "scale", Vector2(0.65, 0.65), 0.3)
 
 		snail.play()
 		wolf.play()
@@ -180,25 +178,22 @@ func swap():
 		cat.play()
 		fish.play()
 		elephant.play()
-		
+
 		$Story.bbcode_text = "[center]Rabbit with the Tablet[/center]"
-		
 
-	# Wolf, Hyena and Fox
 	elif iCount == 4:
-		# Set tweens for positions and scales
 		psTween.tween_property(snail, "position", Vector2(320, 420), 0.35)
 		phTween.tween_property(hippo, "position", Vector2(650 , 355), 0.35)
 		pwTween.tween_property(wolf, "position", Vector2(355, 239), 0.35)
-		prTween.tween_property(rabbit, "position", Vector2(355, 239), 0.35)
-		scTween.tween_property(cat, "position", Vector2(520, 405), 0.35)
+		prTween.tween_property(rabbit, "position", Vector2(255, 239), 0.35)
+		pcTween.tween_property(cat, "position", Vector2(520, 405), 0.35)
 		pwTween.parallel().tween_property(fish, "position",  Vector2(180 , 396), 0.35)
 		peTween.tween_property(elephant, "position", Vector2(55, 350), 0.35)
 
 		ssTween.tween_property(snail, "scale", Vector2(0.45, 0.45), 0.3)
 		shTween.tween_property(hippo, "scale", Vector2(0.3, 0.3), 0.3)
-		swTween.tween_property(wolf, "scale", Vector2(1, 1), 0.3)
-		srTween.tween_property(rabbit, "scale", Vector2(1, 1), 0.3)
+		swTween.tween_property(wolf, "scale", Vector2(0.4, 0.4), 0.3)
+		srTween.tween_property(rabbit, "scale", Vector2(0.4, 0.4), 0.3)
 		scTween.tween_property(cat, "scale", Vector2(0.37, 0.37), 0.3)
 		sfTween.parallel().tween_property(fish, "scale", Vector2(0.39, 0.39), 0.3)
 		seTween.tween_property(elephant, "scale", Vector2(0.4, 0.4), 0.3)
@@ -210,9 +205,9 @@ func swap():
 		cat.play()
 		fish.play()
 		elephant.play()
-		
+
 		$Story.bbcode_text = "[center]Wolf, Hyena and Fox[/center]"
-		
+
 	# Happy Hippo 
 	elif iCount == 5:
 		# Set tweens for positions and scales
@@ -276,7 +271,7 @@ func _on_arrow_right_gui_input(event):
 	if event is InputEventMouseButton and InputEventScreenTouch and event.pressed:
 		Music.clickSfx()
 		# Increment iCount with wrap-around
-		if iCount == 5:
+		if iCount == 6:
 			iCount = 0
 		else:
 			iCount += 1
@@ -310,7 +305,7 @@ func _on_arrow_left_gui_input(event):
 		Music.clickSfx()
 		# Decrement iCount with wrap-around
 		if iCount == 0:
-			iCount = 5
+			iCount = 6
 		else:
 			iCount -= 1
 
