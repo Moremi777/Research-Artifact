@@ -32,6 +32,7 @@ func _ready():
 			"Hidden?": false
 			}
 		$qPlay/QTitle.bbcode_text = "[center]Should you accept a message from:[/center]"
+		
 	elif iStory == 1:
 		# Lucky the Fish
 		questions = {
@@ -42,8 +43,23 @@ func _ready():
 			"Surprising offer?": false,
 			"Stranger?": false
 			}
+			
 		$qPlay/QTitle.bbcode_text = "[center]Should you click on a link from:[/center]"
+		
 	elif iStory == 2:
+		# Rabbit with the Tablet
+		questions = {
+			"Mommy?": true,
+			"Teacher?": true,
+			"Safe website?": true,
+			"Scary website?": false,
+			"Any site on the internet?": false,
+			"Monkey friends' random clicks?": false
+		}
+		
+		$qPlay/QTitle.bbcode_text = "[center]Is it safe to go online with:[/center]"
+
+	elif iStory == 3:
 		# Elephant and his shoe
 		questions = {
 			"Librarian?": true,
@@ -55,18 +71,6 @@ func _ready():
 			"Pop-up adverts?": false
 			}
 		$qPlay/QTitle.bbcode_text = "[font_size={50}]Should you follow screen time advice from:[/font_size]"
-		
-	elif iStory == 3:
-		# Rabbit with the Tablet
-		questions = {
-			"P@$$w0rD": true,
-			"BigDog!15": true,
-			"Red#Car99": true,
-			"1234": false,
-			"abcd": false,
-			"dog": false,
-			}
-		$qPlay/QTitle.bbcode_text = "[center]Is this a good password?[/center]"
 		
 	elif iStory == 4:
 		# Wolf, Hyena and Fox

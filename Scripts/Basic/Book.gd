@@ -26,7 +26,7 @@ func _ready():
 	totCharCount = 0
 	
 	# Array of the story
-	story = ["Snail", "Fish", "Elephant", "Rabbit", "Wolf", "Hippo", "Cat"]
+	story = ["Snail", "Fish", "Rabbit", "Elephant", "Wolf", "Hippo", "Cat"]
 	
 	# Start the story function
 	storyStart()

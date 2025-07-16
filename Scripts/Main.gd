@@ -354,7 +354,7 @@ func _on_f_button_pressed():
 		iStory = 1
 		startBook()
 
-func _on_e_button_pressed():
+func _on_r_button_pressed():
 	# Check if iCount is 2
 	if iCount == 2:
 		# Play the click sound effect
@@ -363,8 +363,8 @@ func _on_e_button_pressed():
 		# Set iStory to 2 and start the book
 		iStory = 2
 		startBook()
-
-func _on_r_button_pressed():
+		
+func _on_e_button_pressed():
 	# Check if iCount is 3
 	if iCount == 3:
 		# Play the click sound effect
