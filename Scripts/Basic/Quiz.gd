@@ -55,7 +55,7 @@ func _ready():
 			"Scary website?": false,
 			"Any site on the internet?": false,
 			"Monkey friends' random clicks?": false
-		}
+			}
 		
 		$qPlay/QTitle.bbcode_text = "[center]Is it safe to go online with:[/center]"
 
@@ -240,6 +240,7 @@ func _on_rw_timer_timeout():
 			twn.tween_property(imgIns, "position", Vector2(finalPosX, finalPosY), 0.1)
 
 		# Start showing results after a short delay
+		
 		await get_tree().create_timer(1.0).timeout
 		if points > 0:
 			spawnRes(0)

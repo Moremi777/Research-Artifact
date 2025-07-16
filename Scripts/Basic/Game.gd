@@ -98,7 +98,7 @@ func _ready():
 
 	# If gameIndex == 2, which is Elephant and his shoe, disable the already existing collision shape
 	# So that it does not intefer with other games
-	if gameIndex == 2:
+	if gameIndex == 3:
 		# Get the height of the ground sprite, this is used for positioning objects in the game
 		Engine.max_fps = 60
 		$Hud.follow_viewport_enabled = false
@@ -119,7 +119,7 @@ func _process(delta: float) -> void:
 	if bpaused:
 		return
 		
-	if gameIndex == 2:
+	if gameIndex == 3:
 		generateObstacles()
 
 		# Move the character2d and camera
@@ -160,7 +160,7 @@ func _on_play_button_pressed():
 	# Remove the instructions
 	$StartGame.scale = Vector2(0, 0)
 	$GameNode2D/Rabbit.setActive(true)
-	if gameIndex == 2:
+	if gameIndex == 3:
 		bpaused = false
 	$Effects.stop()
 	startGame()
@@ -209,8 +209,13 @@ func startGame():
 	elif gameIndex == 1:
 		$Hud/Lives.texture = ResourceLoader.load("res://Images/Heart3.png")
 		$MailTimer.start()
-
+		
+	# This is Rabbit with the Tablet, come back later to fix this
 	elif gameIndex == 2:
+		$Hud/Lives.texture = ResourceLoader.load("res://Images/Heart3.png")
+		$MailTimer.start()
+
+	elif gameIndex == 3:
 		#$".".scale = Vector2(1,1)
 		$StartGame.scale = Vector2(1,1)
 		$GameNode2D.scale = Vector2(1,1)
@@ -238,7 +243,7 @@ func startGame():
 		bpaused = false
 
 	# Wolf, Hyena and Fox game
-	elif gameIndex == 3:
+	elif gameIndex == 4:
 		$Hud/Score.hide()
 		var x: int = 3
 		var y: int = 2
@@ -261,7 +266,7 @@ func startGame():
 		$PauseGame/Pause.show()
 
 	# Happy Hippo game
-	elif gameIndex == 4:
+	elif gameIndex == 5:
 		$Hud/Lives.texture = ResourceLoader.load("res://Images/Heart3.png")
 
 		$BullyTimer.wait_time = (18 - level) * 0.06
@@ -269,7 +274,7 @@ func startGame():
 		prev = [[0, 0], [0, 0]]
 
 	# Cyber Cat game
-	elif gameIndex == 5:
+	elif gameIndex == 6:
 		$Hud/Lives.texture = ResourceLoader.load("res://Images/Heart3.png")
 		$CatTimer.start()
 		$ActivitiesTimer.start()
@@ -745,7 +750,7 @@ func gameEnd(win: bool):
 	$BullyTimer.stop()
 	$ActivitiesTimer.stop()
 
-	if gameIndex == 2:
+	if gameIndex == 3:
 		# Checks if camera2D exists in canvaslayer
 		if $GameNode2D/Camera2D:
 			# Ensures this camera is active
@@ -859,6 +864,7 @@ func _on_bully_timer_timeout():
 	var pos = Vector2(x, y)
 	targetInstance.position = pos
 
+	# Come back to this, if bully the game does not play
 	if randi() % 4 == 3:
 		targetInstance.set("bully", false)
 		targetInstance.get_node("TargetFace").animation = "Victim"
@@ -887,14 +893,14 @@ func pauseGame():
 	elif gameIndex == 1:
 		$MailTimer.paused = true
 
-	elif gameIndex == 4:
+	elif gameIndex == 5:
 		get_node("BullyTimer").paused = true
 		for tar in ig.get_children():
 			if tar == Target:
 				tar.get_node("TargetTimer").paused = true
 				tar.get_node("DispTimer").paused = true
 
-	elif gameIndex == 5:
+	elif gameIndex == 6:
 		$ActivitiesTimer.paused = true
 		GD.isNotAllowed = false
 		for act in ig.get_children():
@@ -929,7 +935,7 @@ func playGame():
 	elif gameIndex == 1:
 		$MailTimer.paused = false
 
-	elif gameIndex == 4:
+	elif gameIndex == 5:
 		$BullyTimer.paused = false
 
 		for tar in ig.get_children():
@@ -937,7 +943,7 @@ func playGame():
 				tar.get_node("TargetTimer").paused = false
 				tar.get_node("DispTimer").paused = false
 
-	elif gameIndex == 5:
+	elif gameIndex == 6:
 		$ActivitiesTimer.paused = false
 		GD.isNotAllowed = true
 		for act in ig.get_children():
@@ -965,7 +971,8 @@ func _on_activities_timer_timeout():
 	actInstance.linear_velocity = velocity.rotated(direction)
 
 	add_child(actInstance)
-
+	
+	# Come back here if some game does nbot play
 	if randi() % 4 == 3:
 		actInstance.set("Monster", false)
 		actInstance.get_node("ActivitiesAnim").animation = "Monster"
@@ -1071,7 +1078,7 @@ func pauseMenus():
 		pauseMenu.hide()
 		get_tree().paused = false
 
-		if gameIndex == 2:
+		if gameIndex == 3:
 			$GameNode2D/Rabbit.setActive(true)
 			$GameNode2D/Rabbit.makeVisible()
 			# Show the ground and rabbit again when unpausing
@@ -1081,7 +1088,7 @@ func pauseMenus():
 		pauseMenu.show()
 		get_tree().paused = true
 
-		if gameIndex == 2:
+		if gameIndex == 3:
 			$GameNode2D/Rabbit.setActive(false)
 			$GameNode2D/Rabbit.makeInvisible()
 			# Hide the ground and rabbit when pausing
