@@ -48,7 +48,7 @@ func storyStart():
 	anim2.play()
 	
 	# Adjust the scale and position of the animations based on the value of iStory
-	if iStory == 2:
+	if iStory == 3:
 		anim.scale = Vector2(1, 1)
 		anim2.scale = Vector2(1.05, 1.05)
 	elif iStory == 1:
@@ -92,7 +92,7 @@ func _on_continue_pressed() -> void:
 		Music.clickSfx()
 		# If the paragraphs are less than 3
 		if currentVerse < 3:
-			if iStory == 2 and currentVerse == 2 and totalVerse <= 3:
+			if iStory == 3 and currentVerse == 2 and totalVerse <= 3:
 				# Skip directly to quiz instead of showing the last verse
 				$AudioStreamPlayer.stop()
 				get_parent().get_node("Effects").stream = ResourceLoader.load("res://Audio/Effects/pageflip.wav")

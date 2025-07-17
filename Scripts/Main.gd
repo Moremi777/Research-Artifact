@@ -129,7 +129,7 @@ func swap():
 	elif iCount == 2:
 		psTween.tween_property(snail, "position", Vector2(120, 425), 0.35)
 		pwTween.parallel().tween_property(fish,  "position", Vector2(60, 350), 0.35)
-		prTween.tween_property(rabbit, "position", Vector2(380,240), 0.35)
+		prTween.tween_property(rabbit, "position", Vector2(450,240), 0.35)
 		peTween.tween_property(elephant, "position", Vector2(665, 350), 0.35)
 		pwTween.parallel().tween_property(wolf, "position", Vector2(570, 410), 0.35)
 		phTween.tween_property(hippo, "position", Vector2(425 , 430), 0.35)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crmj1fjm4a5hn"
-path="res://.godot/imported/Rabbit0006.png-c633e85ec5b34d5af7a4360707c7540e.ctex"
+uid="uid://bdp402jo2tfwi"
+path="res://.godot/imported/Rabbit0009.png-d473d034a76cec061f090083487bffd5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Animations/Rabbit0/Rabbit0006.png"
-dest_files=["res://.godot/imported/Rabbit0006.png-c633e85ec5b34d5af7a4360707c7540e.ctex"]
+source_file="res://Animations/Rabbit1/Rabbit0009.png"
+dest_files=["res://.godot/imported/Rabbit0009.png-d473d034a76cec061f090083487bffd5.ctex"]
 
 [params]
 

@@ -4,6 +4,7 @@ extends Control
 @export var Conveyor: PackedScene
 @export var Envelope: PackedScene
 @export var Target: PackedScene
+@warning_ignore("shadowed_global_identifier")
 @export var Tile: PackedScene
 @export var Activities: PackedScene
 @export var Cat:PackedScene
@@ -114,6 +115,7 @@ func _ready():
 	# Call the running function
 	startRunning()
 
+@warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	# Check if the game is paused
 	if bpaused:
@@ -181,6 +183,7 @@ func startGame():
 		$Hud/Lives.texture = ResourceLoader.load("res://Images/Heart3.png")
 
 		# Calculate the conveyor size based on the level
+		@warning_ignore("integer_division")
 		var conSize: int = (level + 1) / 2 + 5
 		calcConveyor(conSize)
 
@@ -203,6 +206,7 @@ func startGame():
 			createConveyor(Vector2(unitSize * posCount + (unitSize * lay[i] / 2), _screenSize.y / 2 - 2), lay[i], i)
 			posCount += lay[i]
 
+		@warning_ignore("integer_division")
 		$EnvelopeTimer.wait_time = (10 / 1) / 10 + 1
 		$EnvelopeTimer.start()
 
@@ -249,6 +253,7 @@ func startGame():
 		var y: int = 2
 
 		# Checks whether x is odd or is equals to y
+		@warning_ignore("integer_division")
 		for i in range (1, (level + 1)/2):
 			if x % 2 == 1 or x == y:
 				x += 1
@@ -301,6 +306,7 @@ func generateObstacles():
 		var maxObstacles = 1
 		# If the level is greater than 3, start generating a maximum of 2 obstacles
 		# Adding more challenge to the game
+		@warning_ignore("shadowed_variable")
 		var obstaclesType := [Cactus, Cacti, Thorn, Ball, Coin]
 		if level > 6:
 			obstaclesType += [Ball, Coin]
@@ -318,6 +324,7 @@ func generateObstacles():
 		var minSpacing = 300
 		
 		# Get viewport size for proper positioning
+		@warning_ignore("unused_variable")
 		var viewport_size = get_viewport().get_visible_rect().size
 		# Generate the specified number of obstacles
 		for i in range(maxObstacles):
@@ -457,7 +464,9 @@ func removeObstacle(obs):
 func spawnTiles(maxx: int, maxy:int):
 	var uneven: bool = false
 	var imageA: int = 2
+	@warning_ignore("integer_division")
 	var numImages: int =  maxx * maxy / 2
+	@warning_ignore("unused_variable")
 	var rand = RandomNumberGenerator.new()
 
 	var tiles: Array = []
@@ -483,6 +492,7 @@ func spawnTiles(maxx: int, maxy:int):
 			tiles[i][1] = imageA
 
 	var val: int
+	@warning_ignore("shadowed_variable_base_class")
 	var scale = 4.5 / maxy
 	var offy = int((480 - 100 * scale * maxy) / 2)
 	var offx = int((720 - 100 * scale * maxx) / 2)
@@ -492,6 +502,7 @@ func spawnTiles(maxx: int, maxy:int):
 		offx = int((720 - 100 * scale * maxx) / 2)
 		offy = int((480 - 100 * scale * maxy) / 2)
 
+	@warning_ignore("integer_division")
 	matches = maxx * maxy / 2
 
 	for y in range (maxy):
@@ -544,6 +555,7 @@ func customShuffle(arr: Array) -> Array:
 
 # Generates a conveyor layout for the game, assigning different columns
 func calcConveyor(conveyorSize: int):
+	@warning_ignore("shadowed_variable")
 	var prev: int = -1               # Initialize previous group number
 	var tmp: Array [int] = []        # Temp array for conveyor sizes
 	var conCount = level             # Initialize number of conveyor belt objects
@@ -552,6 +564,7 @@ func calcConveyor(conveyorSize: int):
 		conCount += 1                # Ensure there is at least one conveyor belt object
 
 	# Calculate size of each conveyor belt object
+	@warning_ignore("integer_division", "unused_variable", "shadowed_variable_base_class")
 	var size: float = (conveyorSize) / conCount
 	var random = RandomNumberGenerator.new()
 	var containsAll: bool
@@ -582,6 +595,7 @@ func calcConveyor(conveyorSize: int):
 		var minimum = 1
 		var maximum = 3
 		# For keeping track of the index when populating the tmp array
+		@warning_ignore("unused_variable")
 		var k = 0
 		# Determine the total number of conveyor sections
 		conCount = 0
@@ -623,6 +637,7 @@ func calcConveyor(conveyorSize: int):
 			containsAll = true
 			group.clear()
 			# Array to store unique colors
+			@warning_ignore("unused_variable")
 			var uniqueColors: Array = []
 
 			for i in range(conCount):
@@ -643,6 +658,7 @@ func calcConveyor(conveyorSize: int):
 					containsAll = false
 					break
 
+@warning_ignore("shadowed_variable_base_class")
 func createConveyor(pos: Vector2, size: int, i:int):
 	var convInstance = Conveyor.instantiate()
 	$BG/inGame.add_child(convInstance)
@@ -772,6 +788,7 @@ func gameEnd(win: bool):
 		$".".scale = Vector2(1,1)
 		$EndGame.show()
 
+	@warning_ignore("unused_variable")
 	var hud = $Hud
 	if win:
 		catInstance.queue_free()
@@ -818,12 +835,14 @@ func _on_b_menu_button_down():
 	queue_free()
 
 func _on_h_slider_value_changed(value):
+	@warning_ignore("shadowed_variable")
 	var level = int(value)
 	$StartGame/LevelIndicator.text = "Level " + str(level)
 
 func _on_envelope_timer_timeout():
 	var random = RandomNumberGenerator.new()
 	var tp = random.randi_range(0, colCount - 1)
+	@warning_ignore("integer_division")
 	var ln = random.randi() % ((level + 1) / 2 + 5)
 	spawnEnvelope(tp, ln)
 
@@ -831,12 +850,15 @@ func _on_bully_timer_timeout():
 	var targetInstance = Target.instantiate()
 
 	add_child(targetInstance)
+	@warning_ignore("shadowed_variable_base_class")
 	var scale = 0.04 * (20 - level)
 
 	targetInstance.scale = Vector2(scale, scale)
 
+	@warning_ignore("unused_variable")
 	var rand = RandomNumberGenerator.new()
 
+	@warning_ignore("integer_division")
 	targetInstance.get_node("DispTimer").wait_time = (16 - level) / 4
 	targetInstance.get_node("DispTimer").start()
 
@@ -880,6 +902,7 @@ func pauseGame():
 	var ig = $inGame
 
 	if gameIndex == 0:
+		@warning_ignore("standalone_expression")
 		get_tree().root.content_scale_size
 		$EnvelopeTimer.paused = true
 		for env in ig.get_children():
