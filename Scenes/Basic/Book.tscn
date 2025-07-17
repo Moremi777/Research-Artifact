@@ -398,7 +398,6 @@ animation = &"Rabbit0"
 frame_progress = 0.0
 
 [node name="Animation" parent="Pages" instance=ExtResource("4_8cats")]
-visible = false
 position = Vector2(183, 277)
 scale = Vector2(0.8, 0.8)
 animation = &"Rabbit0"
