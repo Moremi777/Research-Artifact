@@ -240,7 +240,7 @@ func swap():
 		$Story.bbcode_text = "[center]Happy Hippo[/center]"
 
 	# Cyber Cat
-	else :
+	else:
 		# Set tweens for positions and scales
 		psTween.tween_property(snail,  "position", Vector2(650, 350), 0.35)
 		pwTween.parallel().tween_property(fish, "position", Vector2(570, 410), 0.35)
