@@ -51,6 +51,9 @@ func storyStart():
 	if iStory == 3:
 		anim.scale = Vector2(1, 1)
 		anim2.scale = Vector2(1.05, 1.05)
+	elif iStory == 2:
+		anim.scale = Vector2(1, 1)
+		anim2.scale = Vector2(1.05, 1.05)
 	elif iStory == 1:
 		anim.position = Vector2(180+25, 285)
 		anim2.position = Vector2(180+25, 285)

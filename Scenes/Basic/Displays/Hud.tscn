@@ -5887,7 +5887,7 @@ stretch_mode = 4
 visible = false
 position = Vector2(360, 255)
 sprite_frames = SubResource("SpriteFrames_rq3fn")
-animation = &"Defeat2"
+animation = &"Defeat4"
 speed_scale = 5.0
 
 [node name="Score" type="RichTextLabel" parent="."]

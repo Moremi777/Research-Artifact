@@ -427,9 +427,7 @@ metadata/_edit_lock_ = true
 [node name="TargetFace" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_gqv20")
-animation = &"Bully"
-frame = 1
-frame_progress = 0.767692
+animation = &"Victim1"
 speed_scale = 5.0
 
 [node name="Button" type="Button" parent="."]
