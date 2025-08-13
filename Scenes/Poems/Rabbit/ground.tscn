@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://simchjorepxk"]
+
+[ext_resource type="Script" uid="uid://hop3w1q6a0xh" path="res://Scripts/Poems/Rabbit/ground.gd" id="1_m4u5c"]
+[ext_resource type="Texture2D" uid="uid://sr0k2a4p115r" path="res://Images/ground.png" id="2_0il4w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sq0tf"]
+size = Vector2(3916, 165)
+
+[node name="Ground" type="Area2D"]
+position = Vector2(0, 852)
+script = ExtResource("1_m4u5c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2.26736, 1)
+texture = ExtResource("2_0il4w")
+offset = Vector2(864, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1958, 9)
+shape = SubResource("RectangleShape2D_sq0tf")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
