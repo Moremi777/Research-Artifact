@@ -37,7 +37,7 @@ var speed: float
 var goal: int
 var score: int
 var lives: int
-var lay: Array [int]
+var lay: Array [int] 
 var group: Array[int]
 var level: int
 var colCount: int
@@ -76,12 +76,15 @@ var birdHeight := [240, 390]
 var coinHeight: = [170, 370]
 var rabbitScore
 
+# RABBIT WITH THE TABLET POEM
+
+
 func _ready():
 	# Playing the voices for each game
 	$Effects.stream = ResourceLoader.load("res://Audio/Voice/GameEx" + str(gameIndex) + ".wav")
 	$Effects.play()
 	bpaused = false
-
+	
 	# Loading the how to play instructions of each game
 	$StartGame/HowTo.texture = ResourceLoader.load("res://Images/GameEx" + str(gameIndex) + ".png")
 
@@ -120,7 +123,8 @@ func _process(delta: float) -> void:
 	# Check if the game is paused
 	if bpaused:
 		return
-		
+	
+			
 	if gameIndex == 3:
 		generateObstacles()
 
@@ -217,7 +221,11 @@ func startGame():
 	# This is Rabbit with the Tablet, come back later to fix this
 	elif gameIndex == 2:
 		$Hud/Lives.texture = ResourceLoader.load("res://Images/Heart3.png")
-		$MailTimer.start()
+		$StartGame.scale = Vector2(1, 1)
+		$GameNode2D.scale = Vector2(1, 1)
+		
+		$BG.hide()
+		
 
 	elif gameIndex == 3:
 		#$".".scale = Vector2(1,1)
@@ -765,6 +773,7 @@ func gameEnd(win: bool):
 	$CatTimer.stop()
 	$BullyTimer.stop()
 	$ActivitiesTimer.stop()
+	$PipeTimer.stop()
 
 	if gameIndex == 3:
 		# Checks if camera2D exists in canvaslayer
@@ -915,6 +924,9 @@ func pauseGame():
 
 	elif gameIndex == 1:
 		$MailTimer.paused = true
+		
+	elif gameIndex == 2:
+		$PipeTimer.paused = true
 
 	elif gameIndex == 5:
 		get_node("BullyTimer").paused = true
@@ -957,6 +969,11 @@ func playGame():
 	# Play Lucky the Fish game
 	elif gameIndex == 1:
 		$MailTimer.paused = false
+		
+	elif gameIndex == 2:
+		$Bird.flying = true
+		$Bird.flap()
+		$PipeTimer.paused = false
 
 	elif gameIndex == 5:
 		$BullyTimer.paused = false

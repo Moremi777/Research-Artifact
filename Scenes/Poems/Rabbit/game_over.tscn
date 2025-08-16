@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmpv6o4cr2ygv"]
+
+[ext_resource type="Texture2D" uid="uid://b2fovk5aj2lph" path="res://Images/restart.png" id="1_ijtlb"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_etkde"]
+texture = ExtResource("1_ijtlb")
+
+[node name="GameOver" type="CanvasLayer"]
+
+[node name="RestartButton" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_etkde")
