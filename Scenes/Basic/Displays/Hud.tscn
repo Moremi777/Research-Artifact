@@ -5884,14 +5884,12 @@ expand_mode = 2
 stretch_mode = 4
 
 [node name="EndAnim" type="AnimatedSprite2D" parent="."]
-visible = false
 position = Vector2(360, 255)
 sprite_frames = SubResource("SpriteFrames_rq3fn")
 animation = &"Defeat4"
 speed_scale = 5.0
 
 [node name="Score" type="RichTextLabel" parent="."]
-visible = false
 offset_left = 298.0
 offset_top = 1.5
 offset_right = 341.0
@@ -5904,7 +5902,6 @@ theme_override_font_sizes/normal_font_size = 35
 text = "0"
 
 [node name="Message" type="RichTextLabel" parent="."]
-visible = false
 offset_left = 230.0
 offset_right = 543.0
 offset_bottom = 120.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cugtttre47j1d"]
+[gd_scene load_steps=41 format=3 uid="uid://cugtttre47j1d"]
 
 [ext_resource type="Texture2D" uid="uid://b7x1xhmjy6pl0" path="res://Images/BackGround.jpg" id="1_klf3e"]
 [ext_resource type="Script" uid="uid://dmc7ksynq0phf" path="res://Scripts/Basic/Game.gd" id="1_qykey"]
@@ -16,6 +16,10 @@
 [ext_resource type="PackedScene" uid="uid://1quej1xdpdtc" path="res://Scenes/Poems/Elephant/Bird.tscn" id="13_7m4i4"]
 [ext_resource type="PackedScene" uid="uid://c7adnmbic5og6" path="res://Scenes/Poems/Elephant/Coin.tscn" id="14_w8vs1"]
 [ext_resource type="PackedScene" uid="uid://dsrk1ffxtrkey" path="res://Scenes/Basic/Displays/Hud.tscn" id="18_3gio5"]
+[ext_resource type="Texture2D" uid="uid://cpb7uyqm38kve" path="res://Images/rabbitBG.jpg" id="26_0n7t0"]
+[ext_resource type="PackedScene" uid="uid://x07ncu5d60o6" path="res://Scenes/Poems/Rabbit/Monkey.tscn" id="26_25yhp"]
+[ext_resource type="PackedScene" uid="uid://enxowufl46wd" path="res://Scenes/Poems/Rabbit/bird.tscn" id="27_25yhp"]
+[ext_resource type="PackedScene" uid="uid://simchjorepxk" path="res://Scenes/Poems/Rabbit/ground.tscn" id="28_tifev"]
 [ext_resource type="FontFile" uid="uid://cuao14s32x006" path="res://Fonts/Caroni-Regular.otf" id="728_7gdf6"]
 [ext_resource type="Texture2D" uid="uid://dwnnlial0w88q" path="res://Images/GameEx0.png" id="729_ald1e"]
 [ext_resource type="Texture2D" uid="uid://f1xch3t6ltfx" path="res://Images/Pause.png" id="730_uh23x"]
@@ -355,6 +359,36 @@ stream = ExtResource("980_t6dhn")
 volume_db = 10.0
 pitch_scale = 1.1
 
+[node name="PipeTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="Monkey" parent="." instance=ExtResource("26_25yhp")]
+script = ExtResource("1_qykey")
+Conveyor = null
+Envelope = null
+Target = null
+Tile = null
+Activities = null
+Cat = null
+Mails = null
+Cactus = null
+Cacti = null
+Thorn = null
+Ball = null
+Bird = null
+Coin = null
+
+[node name="Background" type="Sprite2D" parent="Monkey"]
+texture = ExtResource("26_0n7t0")
+
+[node name="Ground" parent="Monkey" instance=ExtResource("28_tifev")]
+
+[node name="ScoreLabel" type="Label" parent="Monkey"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Bird" parent="Monkey" instance=ExtResource("27_25yhp")]
+
 [connection signal="value_changed" from="StartGame/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="pressed" from="StartGame/playButton" to="." method="_on_play_button_pressed"]
 [connection signal="area_entered" from="EnvelopeStop" to="." method="_on_envelope_stop_area_entered"]
@@ -366,3 +400,4 @@ pitch_scale = 1.1
 [connection signal="button_down" from="EndGame/bMenu" to="." method="_on_b_menu_button_down"]
 [connection signal="button_down" from="EndGame/bLevel" to="." method="_on_b_level_button_down"]
 [connection signal="pressed" from="PauseGame/Pause" to="." method="_on_pause_pressed"]
+[connection signal="timeout" from="PipeTimer" to="." method="_on_pipe_timer_timeout"]

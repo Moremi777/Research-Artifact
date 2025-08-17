@@ -10,6 +10,8 @@ extends Control
 @export var Cat:PackedScene
 @export var Mails:PackedScene
 
+@export var pipe_scene:PackedScene
+
 # Preloading the obstacles scene for quick access
 @export var Cactus: PackedScene
 @export var Cacti: PackedScene
@@ -77,7 +79,79 @@ var coinHeight: = [170, 370]
 var rabbitScore
 
 # RABBIT WITH THE TABLET POEM
+var game_running : bool
+var game_over : bool
+var scroll
+const SCROLL_SPEED : int = 4
+var ground_height : int
+var pipes : Array
+const PIPE_DELAY : int = 100
+const PIPE_RANGE : int = 200
 
+# Called when the node enters the scene tree for the first time.
+
+func new_game():
+	game_running = false
+	game_over = false
+	score = 0
+	scroll = 0
+	$Monkey/ScoreLabel.text = "SCORE: " + str(score)
+	pipes.clear()
+	generate_pipes()
+	$Monkey/Bird.reset()
+
+
+func _input(event):
+	if game_over == false:
+		if event is InputEventMouseButton:
+			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+				if game_running == false:
+					start_game()
+				else:
+					if $Monkey/Bird.flying:
+						$Monkey/Bird.flap()
+						check_top()
+		
+func start_game():
+	game_running = true
+	$Monkey/Bird.flying = true
+	$Monkey/Bird.flap()
+	$PipeTimer.start()
+
+func _on_pipe_timer_timeout():
+	generate_pipes()
+
+func generate_pipes():
+	var pipe = pipe_scene.instantiate()
+	pipe.position.x = screen_size.x + PIPE_DELAY
+	pipe.position.y = (screen_size.y - ground_height) / 2 + randi_range(-PIPE_RANGE, PIPE_RANGE)
+	pipe.hit.connect(bird_hit)
+	pipe.scored.connect(scored)
+	add_child(pipe)
+	pipes.append(pipe)
+	
+func scored():
+	score += 1
+	$Monkey/ScoreLabel.text = "Score: " + str(score)
+	
+func check_top():
+	if $Monkey/Bird.position.y < 0:
+		$Monkey/Bird.falling = true
+		stop_game()
+
+func stop_game():
+	$PipeTimer.stop()
+	$Monkey/Bird.flying = false
+	game_running = false
+	game_over = true
+
+func bird_hit():
+	$Monkey/Bird.falling = true
+	stop_game()
+
+func _on_ground_hit():
+	$Monkey/Bird.falling = false
+	stop_game()
 
 func _ready():
 	# Playing the voices for each game
@@ -90,6 +164,9 @@ func _ready():
 
 	# Ensures that the game window responds to player inputs
 	grab_click_focus()
+	
+	ground_height = $Monkey/Ground.get_node("Sprite2D").texture.get_height()
+	new_game()
 
 	# Enable viewport for the camera to follow the screen, can be done in the Inspector node
 	#$CanvasLayer.follow_viewport_enabled = true
@@ -123,6 +200,18 @@ func _process(delta: float) -> void:
 	# Check if the game is paused
 	if bpaused:
 		return
+		
+	if gameIndex == 2:
+		if game_running:
+			scroll += SCROLL_SPEED
+			
+			if scroll >= screen_size.x:
+				scroll = 0
+				
+			$Monkey/Ground.position.x = -scroll
+			
+			for pipe in pipes:
+				pipe.position.x -= SCROLL_SPEED
 	
 			
 	if gameIndex == 3:
@@ -168,6 +257,9 @@ func _on_play_button_pressed():
 	$GameNode2D/Rabbit.setActive(true)
 	if gameIndex == 3:
 		bpaused = false
+	if gameIndex == 2:
+		bpaused = false
+		
 	$Effects.stop()
 	startGame()
 
@@ -221,12 +313,10 @@ func startGame():
 	# This is Rabbit with the Tablet, come back later to fix this
 	elif gameIndex == 2:
 		$Hud/Lives.texture = ResourceLoader.load("res://Images/Heart3.png")
-		$StartGame.scale = Vector2(1, 1)
-		$GameNode2D.scale = Vector2(1, 1)
-		
+		$PauseGame/Pause.show()
+		$PipeTimer.start()
 		$BG.hide()
 		
-
 	elif gameIndex == 3:
 		#$".".scale = Vector2(1,1)
 		$StartGame.scale = Vector2(1,1)
@@ -971,8 +1061,6 @@ func playGame():
 		$MailTimer.paused = false
 		
 	elif gameIndex == 2:
-		$Bird.flying = true
-		$Bird.flap()
 		$PipeTimer.paused = false
 
 	elif gameIndex == 5:
@@ -1111,6 +1199,7 @@ func spawnMails():
 
 func _on_mail_timer_timeout():
 	spawnMails()
+	
 
 func pauseMenus():
 	# If the game is currently paused, unpause it
