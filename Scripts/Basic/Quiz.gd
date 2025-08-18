@@ -54,7 +54,7 @@ func _ready():
 			"Safe website?": true,
 			"Scary website?": false,
 			"Any site on the internet?": false,
-			"Monkey friends' random clicks?": false
+			"Monkey friends random clicks?": false
 			}
 		
 		$qPlay/QTitle.bbcode_text = "[center]Is it safe to go online with:[/center]"

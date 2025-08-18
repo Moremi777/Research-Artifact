@@ -102,15 +102,16 @@ func new_game():
 
 
 func _input(event):
-	if game_over == false:
-		if event is InputEventMouseButton:
-			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-				if game_running == false:
-					start_game()
-				else:
-					if $Monkey/Bird.flying:
-						$Monkey/Bird.flap()
-						check_top()
+	if gameIndex == 2:
+		if game_over == false:
+			if event is InputEventMouseButton:
+				if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+					if game_running == false:
+						start_game()
+					else:
+						if $Monkey/Bird.flying:
+							$Monkey/Bird.flap()
+							check_top()
 		
 func start_game():
 	game_running = true
@@ -164,9 +165,6 @@ func _ready():
 
 	# Ensures that the game window responds to player inputs
 	grab_click_focus()
-	
-	ground_height = $Monkey/Ground.get_node("Sprite2D").texture.get_height()
-	new_game()
 
 	# Enable viewport for the camera to follow the screen, can be done in the Inspector node
 	#$CanvasLayer.follow_viewport_enabled = true
@@ -179,7 +177,15 @@ func _ready():
 
 	# If gameIndex == 2, which is Elephant and his shoe, disable the already existing collision shape
 	# So that it does not intefer with other games
-	if gameIndex == 3:
+	if gameIndex == 2:
+		# Get the height of the ground sprite, this is used for positioning objects in the game
+		$Hud.follow_viewport_enabled = false
+		
+		screen_size = get_window().size
+		ground_height = $Monkey/Ground.get_node("Sprite2D").texture.get_height()
+		new_game()
+		
+	elif gameIndex == 3:
 		# Get the height of the ground sprite, this is used for positioning objects in the game
 		Engine.max_fps = 60
 		$Hud.follow_viewport_enabled = false
@@ -214,7 +220,7 @@ func _process(delta: float) -> void:
 				pipe.position.x -= SCROLL_SPEED
 	
 			
-	if gameIndex == 3:
+	elif gameIndex == 3:
 		generateObstacles()
 
 		# Move the character2d and camera
@@ -255,9 +261,10 @@ func _on_play_button_pressed():
 	# Remove the instructions
 	$StartGame.scale = Vector2(0, 0)
 	$GameNode2D/Rabbit.setActive(true)
-	if gameIndex == 3:
-		bpaused = false
+	
 	if gameIndex == 2:
+		bpaused = false
+	elif gameIndex == 3:
 		bpaused = false
 		
 	$Effects.stop()
@@ -313,9 +320,16 @@ func startGame():
 	# This is Rabbit with the Tablet, come back later to fix this
 	elif gameIndex == 2:
 		$Hud/Lives.texture = ResourceLoader.load("res://Images/Heart3.png")
-		$PauseGame/Pause.show()
 		$PipeTimer.start()
 		$BG.hide()
+		
+		$StartGame.hide()
+		
+		$Monkey/Background.show()
+		$Monkey/Ground.show()
+		$Monkey/Bird.show()
+		
+		bpaused = false
 		
 	elif gameIndex == 3:
 		#$".".scale = Vector2(1,1)
@@ -1014,9 +1028,6 @@ func pauseGame():
 
 	elif gameIndex == 1:
 		$MailTimer.paused = true
-		
-	elif gameIndex == 2:
-		$PipeTimer.paused = true
 
 	elif gameIndex == 5:
 		get_node("BullyTimer").paused = true

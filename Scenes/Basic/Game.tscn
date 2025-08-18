@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cugtttre47j1d"]
+[gd_scene load_steps=42 format=3 uid="uid://cugtttre47j1d"]
 
 [ext_resource type="Texture2D" uid="uid://b7x1xhmjy6pl0" path="res://Images/BackGround.jpg" id="1_klf3e"]
 [ext_resource type="Script" uid="uid://dmc7ksynq0phf" path="res://Scripts/Basic/Game.gd" id="1_qykey"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://drfcovfeg6hec" path="res://Scenes/Poems/Wolf/Tile.tscn" id="6_16q3m"]
 [ext_resource type="PackedScene" uid="uid://cln8y7rifqruh" path="res://Scenes/Poems/Cat/Activities.tscn" id="7_25vkh"]
 [ext_resource type="PackedScene" uid="uid://h7xakbe2sx1l" path="res://Scenes/Poems/Cat/Cat.tscn" id="8_y7na4"]
+[ext_resource type="PackedScene" uid="uid://bbqmorpp272tq" path="res://Scenes/Poems/Rabbit/pipe.tscn" id="9_25yhp"]
 [ext_resource type="PackedScene" uid="uid://cnxd7db1y8nwr" path="res://Scenes/Poems/Fish/Mails.tscn" id="9_h53i4"]
 [ext_resource type="PackedScene" uid="uid://hkh28470jkqy" path="res://Scenes/Poems/Elephant/Cactus.tscn" id="9_krv1n"]
 [ext_resource type="PackedScene" uid="uid://bfuwqf424j1hd" path="res://Scenes/Poems/Elephant/Cacti.tscn" id="10_jcd8q"]
@@ -166,6 +167,7 @@ Tile = ExtResource("6_16q3m")
 Activities = ExtResource("7_25vkh")
 Cat = ExtResource("8_y7na4")
 Mails = ExtResource("9_h53i4")
+pipe_scene = ExtResource("9_25yhp")
 Cactus = ExtResource("9_krv1n")
 Cacti = ExtResource("10_jcd8q")
 Thorn = ExtResource("11_3gio5")
@@ -245,6 +247,7 @@ expand_mode = 1
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StartGame"]
 
 [node name="Hud" parent="." instance=ExtResource("18_3gio5")]
+visible = false
 
 [node name="CatPath2D" type="Path2D" parent="."]
 self_modulate = Color(0.501961, 0.6, 1, 0.701961)
@@ -363,20 +366,7 @@ pitch_scale = 1.1
 wait_time = 1.5
 
 [node name="Monkey" parent="." instance=ExtResource("26_25yhp")]
-script = ExtResource("1_qykey")
-Conveyor = null
-Envelope = null
-Target = null
-Tile = null
-Activities = null
-Cat = null
-Mails = null
-Cactus = null
-Cacti = null
-Thorn = null
-Ball = null
-Bird = null
-Coin = null
+script = null
 
 [node name="Background" type="Sprite2D" parent="Monkey"]
 texture = ExtResource("26_0n7t0")
