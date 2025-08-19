@@ -36,6 +36,7 @@ theme_override_font_sizes/font_size = 40
 text = "SCORE: 0"
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(325, 237)
 
 [connection signal="hit" from="Ground2" to="." method="_on_ground_hit"]
 [connection signal="timeout" from="PipeTimer" to="." method="_on_pipe_timer_timeout"]

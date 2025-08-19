@@ -108,7 +108,8 @@ func _ready():
 		var monkey_instance = monkey_scene.instantiate()
 		add_child(monkey_instance)
 
-		var pipe_timer = monkey_instance.get_node("PipeTimer")
+		# Store PipeTimer in the member variable
+		pipe_timer = monkey_instance.get_node("PipeTimer")
 		pipe_timer.start()
 
 	# If gameIndex == 2, which is Elephant and his shoe, disable the already existing collision shape
@@ -128,6 +129,7 @@ func _ready():
 			groundHeight = 100
 	# Call the running function
 	startRunning()
+
 
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
@@ -184,6 +186,10 @@ func _on_play_button_pressed():
 		
 	$Effects.stop()
 	startGame()
+	
+func stop_pipe_timer():
+	if pipe_timer:
+		pipe_timer.stop()
 
 func startGame():
 	# At the start, all games have 3 lives and to win you need to have 20 points
@@ -235,7 +241,7 @@ func startGame():
 	# This is Rabbit with the Tablet, come back later to fix this
 	elif gameIndex == 2:
 		$Hud/Lives.texture = ResourceLoader.load("res://Images/Heart3.png")
-		pipe_timer.start()
+		stop_pipe_timer()
 		$BG.hide()
 		
 		$StartGame.hide()
