@@ -11,7 +11,6 @@ extends Control
 @export var Mails:PackedScene
 
 @export var pipe_scene:PackedScene
-
 # Preloading the obstacles scene for quick access
 @export var Cactus: PackedScene
 @export var Cacti: PackedScene
@@ -78,81 +77,10 @@ var birdHeight := [240, 390]
 var coinHeight: = [170, 370]
 var rabbitScore
 
-# RABBIT WITH THE TABLET POEM
-var game_running : bool
-var game_over : bool
-var scroll
-const SCROLL_SPEED : int = 4
-var ground_height : int
-var pipes : Array
-const PIPE_DELAY : int = 100
-const PIPE_RANGE : int = 200
+var monkey_instance
+var pipe_timer
 
 # Called when the node enters the scene tree for the first time.
-
-func new_game():
-	game_running = false
-	game_over = false
-	score = 0
-	scroll = 0
-	$Monkey/ScoreLabel.text = "SCORE: " + str(score)
-	pipes.clear()
-	generate_pipes()
-	$Monkey/Bird.reset()
-
-
-func _input(event):
-	if gameIndex == 2:
-		if game_over == false:
-			if event is InputEventMouseButton:
-				if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-					if game_running == false:
-						start_game()
-					else:
-						if $Monkey/Bird.flying:
-							$Monkey/Bird.flap()
-							check_top()
-		
-func start_game():
-	game_running = true
-	$Monkey/Bird.flying = true
-	$Monkey/Bird.flap()
-	$PipeTimer.start()
-
-func _on_pipe_timer_timeout():
-	generate_pipes()
-
-func generate_pipes():
-	var pipe = pipe_scene.instantiate()
-	pipe.position.x = screen_size.x + PIPE_DELAY
-	pipe.position.y = (screen_size.y - ground_height) / 2 + randi_range(-PIPE_RANGE, PIPE_RANGE)
-	pipe.hit.connect(bird_hit)
-	pipe.scored.connect(scored)
-	add_child(pipe)
-	pipes.append(pipe)
-	
-func scored():
-	score += 1
-	$Monkey/ScoreLabel.text = "Score: " + str(score)
-	
-func check_top():
-	if $Monkey/Bird.position.y < 0:
-		$Monkey/Bird.falling = true
-		stop_game()
-
-func stop_game():
-	$PipeTimer.stop()
-	$Monkey/Bird.flying = false
-	game_running = false
-	game_over = true
-
-func bird_hit():
-	$Monkey/Bird.falling = true
-	stop_game()
-
-func _on_ground_hit():
-	$Monkey/Bird.falling = false
-	stop_game()
 
 func _ready():
 	# Playing the voices for each game
@@ -174,17 +102,17 @@ func _ready():
 	# Screensize of the window, this is used for resising elements based on the screen resolution
 	screen_size = get_viewport().get_visible_rect().size
 	#screen_size = get_window().size
+	
+	if gameIndex == 2:
+		var monkey_scene = preload("res://Scenes/Poems/Rabbit/Monkey.tscn")
+		var monkey_instance = monkey_scene.instantiate()
+		add_child(monkey_instance)
+
+		var pipe_timer = monkey_instance.get_node("PipeTimer")
+		pipe_timer.start()
 
 	# If gameIndex == 2, which is Elephant and his shoe, disable the already existing collision shape
 	# So that it does not intefer with other games
-	if gameIndex == 2:
-		# Get the height of the ground sprite, this is used for positioning objects in the game
-		$Hud.follow_viewport_enabled = false
-		
-		screen_size = get_window().size
-		ground_height = $Monkey/Ground.get_node("Sprite2D").texture.get_height()
-		new_game()
-		
 	elif gameIndex == 3:
 		# Get the height of the ground sprite, this is used for positioning objects in the game
 		Engine.max_fps = 60
@@ -207,20 +135,7 @@ func _process(delta: float) -> void:
 	if bpaused:
 		return
 		
-	if gameIndex == 2:
-		if game_running:
-			scroll += SCROLL_SPEED
-			
-			if scroll >= screen_size.x:
-				scroll = 0
-				
-			$Monkey/Ground.position.x = -scroll
-			
-			for pipe in pipes:
-				pipe.position.x -= SCROLL_SPEED
-	
-			
-	elif gameIndex == 3:
+	if gameIndex == 3:
 		generateObstacles()
 
 		# Move the character2d and camera
@@ -320,14 +235,10 @@ func startGame():
 	# This is Rabbit with the Tablet, come back later to fix this
 	elif gameIndex == 2:
 		$Hud/Lives.texture = ResourceLoader.load("res://Images/Heart3.png")
-		$PipeTimer.start()
+		pipe_timer.start()
 		$BG.hide()
 		
 		$StartGame.hide()
-		
-		$Monkey/Background.show()
-		$Monkey/Ground.show()
-		$Monkey/Bird.show()
 		
 		bpaused = false
 		
@@ -1070,9 +981,6 @@ func playGame():
 	# Play Lucky the Fish game
 	elif gameIndex == 1:
 		$MailTimer.paused = false
-		
-	elif gameIndex == 2:
-		$PipeTimer.paused = false
 
 	elif gameIndex == 5:
 		$BullyTimer.paused = false
@@ -1210,7 +1118,6 @@ func spawnMails():
 
 func _on_mail_timer_timeout():
 	spawnMails()
-	
 
 func pauseMenus():
 	# If the game is currently paused, unpause it

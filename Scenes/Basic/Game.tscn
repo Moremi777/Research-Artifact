@@ -363,7 +363,6 @@ volume_db = 10.0
 pitch_scale = 1.1
 
 [node name="PipeTimer" type="Timer" parent="."]
-wait_time = 1.5
 
 [node name="Monkey" parent="." instance=ExtResource("26_25yhp")]
 script = null
@@ -372,6 +371,7 @@ script = null
 texture = ExtResource("26_0n7t0")
 
 [node name="Ground" parent="Monkey" instance=ExtResource("28_tifev")]
+position = Vector2(-965, 488)
 
 [node name="ScoreLabel" type="Label" parent="Monkey"]
 offset_right = 40.0

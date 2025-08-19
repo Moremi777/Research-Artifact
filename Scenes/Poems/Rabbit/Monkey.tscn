@@ -35,5 +35,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
 text = "SCORE: 0"
 
+[node name="Camera2D" type="Camera2D" parent="."]
+
 [connection signal="hit" from="Ground2" to="." method="_on_ground_hit"]
 [connection signal="timeout" from="PipeTimer" to="." method="_on_pipe_timer_timeout"]
