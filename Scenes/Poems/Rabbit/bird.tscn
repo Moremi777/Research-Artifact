@@ -24,7 +24,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_plu7d"]
 radius = 20.0
-height = 58.0
+height = 46.0
 
 [node name="Bird" type="CharacterBody2D"]
 position = Vector2(8, -57)

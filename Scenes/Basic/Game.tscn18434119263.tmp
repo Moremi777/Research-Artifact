@@ -359,7 +359,7 @@ volume_db = 10.0
 pitch_scale = 1.1
 
 [node name="PipeTimer" type="Timer" parent="."]
-wait_time = 0.001
+wait_time = 1.5
 
 [connection signal="value_changed" from="StartGame/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="pressed" from="StartGame/playButton" to="." method="_on_play_button_pressed"]

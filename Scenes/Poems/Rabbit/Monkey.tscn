@@ -6,26 +6,26 @@
 [ext_resource type="PackedScene" uid="uid://enxowufl46wd" path="res://Scenes/Poems/Rabbit/bird.tscn" id="2_hjp0s"]
 [ext_resource type="PackedScene" uid="uid://simchjorepxk" path="res://Scenes/Poems/Rabbit/ground.tscn" id="4_y01pu"]
 
-[node name="Monkey2" type="Node2D"]
+[node name="Monkey" type="Node2D"]
 script = ExtResource("1_d5muw")
 pipe_scene = ExtResource("2_1qu5g")
 
-[node name="Background2" type="Sprite2D" parent="."]
-position = Vector2(340.125, 212.5)
-scale = Vector2(0.392578, 0.393519)
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(378, 239)
+scale = Vector2(0.389193, 0.445514)
 texture = ExtResource("1_yfglq")
 
-[node name="Bird2" parent="." instance=ExtResource("2_hjp0s")]
+[node name="Bird" parent="." instance=ExtResource("2_hjp0s")]
 position = Vector2(132, 266)
 
-[node name="Ground2" parent="." instance=ExtResource("4_y01pu")]
+[node name="Ground" parent="." instance=ExtResource("4_y01pu")]
 z_index = 1
-position = Vector2(-240, 497)
+position = Vector2(0, 519)
 
 [node name="PipeTimer" type="Timer" parent="."]
-wait_time = 1.5
+wait_time = 2.0
 
-[node name="ScoreLabel2" type="Label" parent="."]
+[node name="ScoreLabel" type="Label" parent="."]
 z_index = 1
 offset_left = 228.0
 offset_top = 9.0
@@ -35,8 +35,5 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
 text = "SCORE: 0"
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(325, 237)
-
-[connection signal="hit" from="Ground2" to="." method="_on_ground_hit"]
+[connection signal="hit" from="Ground" to="." method="_on_ground_hit"]
 [connection signal="timeout" from="PipeTimer" to="." method="_on_pipe_timer_timeout"]

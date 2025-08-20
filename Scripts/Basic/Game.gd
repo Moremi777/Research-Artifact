@@ -77,10 +77,21 @@ var birdHeight := [240, 390]
 var coinHeight: = [170, 370]
 var rabbitScore
 
+var monkey_scene = preload("res://Scenes/Poems/Rabbit/Monkey.tscn")
 var monkey_instance
-var pipe_timer
 
 # Called when the node enters the scene tree for the first time.
+
+func start_monkey_game():
+	monkey_instance = monkey_scene.instantiate()
+	add_child(monkey_instance)
+
+	# Inject Game's PipeTimer
+	monkey_instance.pipe_timer = $PipeTimer
+
+	# Connect Game’s PipeTimer to Monkey’s method
+	if not $PipeTimer.timeout.is_connected(monkey_instance._on_pipe_timer_timeout):
+		$PipeTimer.timeout.connect(monkey_instance._on_pipe_timer_timeout)
 
 func _ready():
 	# Playing the voices for each game
@@ -103,18 +114,9 @@ func _ready():
 	screen_size = get_viewport().get_visible_rect().size
 	#screen_size = get_window().size
 	
-	if gameIndex == 2:
-		var monkey_scene = preload("res://Scenes/Poems/Rabbit/Monkey.tscn")
-		var monkey_instance = monkey_scene.instantiate()
-		add_child(monkey_instance)
-
-		# Store PipeTimer in the member variable
-		pipe_timer = monkey_instance.get_node("PipeTimer")
-		pipe_timer.start()
-
 	# If gameIndex == 2, which is Elephant and his shoe, disable the already existing collision shape
 	# So that it does not intefer with other games
-	elif gameIndex == 3:
+	if gameIndex == 3:
 		# Get the height of the ground sprite, this is used for positioning objects in the game
 		Engine.max_fps = 60
 		$Hud.follow_viewport_enabled = false
@@ -187,9 +189,6 @@ func _on_play_button_pressed():
 	$Effects.stop()
 	startGame()
 	
-func stop_pipe_timer():
-	if pipe_timer:
-		pipe_timer.stop()
 
 func startGame():
 	# At the start, all games have 3 lives and to win you need to have 20 points
@@ -241,13 +240,13 @@ func startGame():
 	# This is Rabbit with the Tablet, come back later to fix this
 	elif gameIndex == 2:
 		$Hud/Lives.texture = ResourceLoader.load("res://Images/Heart3.png")
-		stop_pipe_timer()
+		start_monkey_game()
 		$BG.hide()
 		
 		$StartGame.hide()
 		
 		bpaused = false
-		
+				
 	elif gameIndex == 3:
 		#$".".scale = Vector2(1,1)
 		$StartGame.scale = Vector2(1,1)
