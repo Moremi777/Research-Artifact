@@ -14,10 +14,6 @@ var pipes : Array = []
 const PIPE_DELAY : int = 100
 const PIPE_RANGE : int = 200
 
-signal gameOver
-signal game_won
-
-
 func _ready():
 	screen_size = get_viewport().size
 	ground_height = $Ground.get_node("Sprite2D").texture.get_height()
@@ -127,11 +123,3 @@ func _on_ground_hit():
 		print("Bird Y when ground hit: ", $Bird.position.y)
 		$Bird.falling = false
 		stop_game()
-		
-func _on_player_died():
-	emit_signal("gameOver")
-
-func _on_score_increased():
-	score += 1
-	if score >= 15:
-		emit_signal("game_won")
