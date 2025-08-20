@@ -92,6 +92,21 @@ func start_monkey_game():
 	# Connect Game’s PipeTimer to Monkey’s method
 	if not $PipeTimer.timeout.is_connected(monkey_instance._on_pipe_timer_timeout):
 		$PipeTimer.timeout.connect(monkey_instance._on_pipe_timer_timeout)
+		
+	# ✅ Connect Monkey’s signals to Game’s handlers
+	monkey_instance.game_over.connect(_on_monkey_game_over)
+	monkey_instance.game_won.connect(_on_monkey_game_won)
+
+func _on_monkey_game_over():
+	$PipeTimer.stop()
+	monkey_instance.queue_free() # optional, remove Monkey from scene
+	$Hud.visible = true  # whatever your UI node is called
+
+func _on_monkey_game_won():
+	$PipeTimer.stop()
+	monkey_instance.queue_free()
+	$Hud.visible = true   # whatever your UI node is called
+
 
 func _ready():
 	# Playing the voices for each game
@@ -239,11 +254,11 @@ func startGame():
 		
 	# This is Rabbit with the Tablet, come back later to fix this
 	elif gameIndex == 2:
-		$Hud/Lives.texture = ResourceLoader.load("res://Images/Heart3.png")
 		start_monkey_game()
 		$BG.hide()
 		
 		$StartGame.hide()
+		$Hud/Lives.texture = ResourceLoader.load("res://Images/Heart3.png")
 		
 		bpaused = false
 				
@@ -794,8 +809,23 @@ func gameEnd(win: bool):
 	$BullyTimer.stop()
 	$ActivitiesTimer.stop()
 	$PipeTimer.stop()
+	
 
-	if gameIndex == 3:
+	# Handle Flappy Bird end state
+	if gameIndex == 2:
+		# stop pipes & obstacles
+		var valid_obstacles = obstacles.filter(func(obs): return is_instance_valid(obs))
+		for obs in valid_obstacles:
+			obs.queue_free()
+		obstacles.clear()
+
+		# Reset scale (if needed for layout consistency)
+		$".".scale = Vector2(1,1)
+
+		# Show shared EndGame canvas
+		$EndGame.show()
+
+	elif gameIndex == 3:
 		# Checks if camera2D exists in canvaslayer
 		if $GameNode2D/Camera2D:
 			# Ensures this camera is active
