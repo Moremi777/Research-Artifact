@@ -1,5 +1,6 @@
 extends Node
 
+signal gameOver(win: bool)
 @export var pipe_scene : PackedScene
 
 var pipe_timer: Timer
@@ -13,6 +14,25 @@ var ground_height : int
 var pipes : Array = []
 const PIPE_DELAY : int = 100
 const PIPE_RANGE : int = 200
+
+var max_levels: int = 10  # horizontal slider total levels
+
+func _on_player_died():
+	pipe_timer.stop()
+	$Bird.flying = false
+	game_running = false
+	emit_signal("gameOver", false)
+
+func _on_all_levels_cleared():
+	pipe_timer.stop()
+	$Bird.flying = false
+	game_running = false
+	emit_signal("gameOver", true)
+	
+func _on_pipe_cleared():  # call this when Bird successfully passes a pipe
+	score += 1
+	if score >= max_levels:
+		_on_all_levels_cleared()
 
 func _ready():
 	screen_size = get_viewport().size
@@ -110,6 +130,8 @@ func stop_game():
 	$Bird.flying = false
 	game_running = false
 	game_over = true
+	
+	emit_signal("gameOver", false)  # ← player lost
 
 func bird_hit():
 	print("Bird hit a pipe!")

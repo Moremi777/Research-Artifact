@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cugtttre47j1d"]
+[gd_scene load_steps=39 format=3 uid="uid://cugtttre47j1d"]
 
 [ext_resource type="Texture2D" uid="uid://b7x1xhmjy6pl0" path="res://Images/BackGround.jpg" id="1_klf3e"]
 [ext_resource type="Script" uid="uid://dmc7ksynq0phf" path="res://Scripts/Basic/Game.gd" id="1_qykey"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://1quej1xdpdtc" path="res://Scenes/Poems/Elephant/Bird.tscn" id="13_7m4i4"]
 [ext_resource type="PackedScene" uid="uid://c7adnmbic5og6" path="res://Scenes/Poems/Elephant/Coin.tscn" id="14_w8vs1"]
 [ext_resource type="PackedScene" uid="uid://dsrk1ffxtrkey" path="res://Scenes/Basic/Displays/Hud.tscn" id="18_3gio5"]
+[ext_resource type="PackedScene" uid="uid://x07ncu5d60o6" path="res://Scenes/Poems/Rabbit/Monkey.tscn" id="26_28i3r"]
 [ext_resource type="FontFile" uid="uid://cuao14s32x006" path="res://Fonts/Caroni-Regular.otf" id="728_7gdf6"]
 [ext_resource type="Texture2D" uid="uid://dwnnlial0w88q" path="res://Images/GameEx0.png" id="729_ald1e"]
 [ext_resource type="Texture2D" uid="uid://f1xch3t6ltfx" path="res://Images/Pause.png" id="730_uh23x"]
@@ -360,6 +361,8 @@ pitch_scale = 1.1
 
 [node name="PipeTimer" type="Timer" parent="."]
 wait_time = 0.001
+
+[node name="Monkey" parent="." instance=ExtResource("26_28i3r")]
 
 [connection signal="value_changed" from="StartGame/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="pressed" from="StartGame/playButton" to="." method="_on_play_button_pressed"]

@@ -78,7 +78,8 @@ var coinHeight: = [170, 370]
 var rabbitScore
 
 var monkey_scene = preload("res://Scenes/Poems/Rabbit/Monkey.tscn")
-var monkey_instance
+
+var monkey_instance : Node = null
 
 # Called when the node enters the scene tree for the first time.
 
@@ -86,13 +87,36 @@ func start_monkey_game():
 	monkey_instance = monkey_scene.instantiate()
 	add_child(monkey_instance)
 
-	# Inject Game's PipeTimer
+	# Inject PipeTimer
 	monkey_instance.pipe_timer = $PipeTimer
 
-	# Connect Game’s PipeTimer to Monkey’s method
+	# Connect PipeTimer
 	if not $PipeTimer.timeout.is_connected(monkey_instance._on_pipe_timer_timeout):
 		$PipeTimer.timeout.connect(monkey_instance._on_pipe_timer_timeout)
 
+  # Connect the game_end signal to Game's gameEnd()
+	if not monkey_instance.is_connected("gameOver", Callable(self, "_on_monkey_game_over")):
+		monkey_instance.connect("gameOver", Callable(self, "_on_monkey_game_over"))
+
+		
+	monkey_instance.max_levels = int($StartGame/HSlider.value)
+	
+func _on_monkey_game_over(win: bool):
+	# Just show result
+	$Hud/Lives.visible = false
+	$Hud.visible = true
+	$Hud/Message.text = "WON!" if win else "LOSE!"
+	$Hud/EndAnim.animation = "Victory2" if win else "Defeat2"
+	$Hud/EndAnim.visible = true
+	$Hud/EndAnim.play()
+	$EndGame.show()
+
+	# Clean up instance
+	if is_instance_valid(monkey_instance):
+		monkey_instance.queue_free()
+		monkey_instance = null
+
+# Set the max levels according to HSlider
 func _ready():
 	# Playing the voices for each game
 	$Effects.stream = ResourceLoader.load("res://Audio/Voice/GameEx" + str(gameIndex) + ".wav")
@@ -116,6 +140,7 @@ func _ready():
 	
 	# If gameIndex == 2, which is Elephant and his shoe, disable the already existing collision shape
 	# So that it does not intefer with other games
+	
 	if gameIndex == 3:
 		# Get the height of the ground sprite, this is used for positioning objects in the game
 		Engine.max_fps = 60
@@ -795,7 +820,17 @@ func gameEnd(win: bool):
 	$ActivitiesTimer.stop()
 	$PipeTimer.stop()
 	
+	if gameIndex == 2:
+		# Free Monkey instance when game ends
+		if is_instance_valid(monkey_instance):
+			if monkey_instance.has_method("clear_pipes"):
+				monkey_instance.clear_pipes()
+			monkey_instance.queue_free()
+			monkey_instance = null   # clear reference
 
+		$".".scale = Vector2(1,1)
+		$EndGame.show()
+			
 	if gameIndex == 3:
 		# Checks if camera2D exists in canvaslayer
 		if $GameNode2D/Camera2D:
@@ -830,6 +865,7 @@ func gameEnd(win: bool):
 	else:
 		catInstance.queue_free()
 		mailInstance.queue_free()
+
 		ap.stream = ResourceLoader.load("res://Audio/Voice/TA.wav")
 		$Hud/Message.text = "You LOSE"
 		$Hud/EndAnim.animation = "Defeat" + str(gameIndex)
