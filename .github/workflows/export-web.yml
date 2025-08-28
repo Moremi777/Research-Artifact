@@ -1,0 +1,57 @@
+name: Export Web (Godot) & Deploy to Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Export the game (no local templates needed)
+      - name: Export via Godot
+        id: export
+        uses: firebelley/godot-export@v7.0.0
+        with:
+          # Use the standard Linux binary (runs headless via flags)
+          godot_executable_download_url: https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_export_templates.tpz
+          relative_project_path: ./
+          # Export only the Web preset (optional; omit to export all)
+          presets_to_export: Web
+          # Put files in the directory from your preset’s Export Path
+          use_preset_export_path: true
+          verbose: true
+          cache: true
+
+      # Upload exported site to Pages as an artifact
+      - name: Upload static files as artifact
+        id: upload
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # The action outputs the *raw export folder*; it will contain index.html, wasm, pck, js, etc.
+          path: ${{ steps.export.outputs.build_directory }}
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy-pages.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: export
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deploy-pages
+        uses: actions/deploy-pages@v4
